@@ -14,4 +14,5 @@ function asyncRequest(resource, callback, resources = DEFAULT_RESOURCES) {
         callback(resources[resource]);
     }, randomDelay);
 }
+
 module.exports = asyncRequest;
