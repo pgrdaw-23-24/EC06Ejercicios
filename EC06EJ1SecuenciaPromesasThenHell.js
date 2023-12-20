@@ -15,9 +15,15 @@ function obtRecurso(recurso) {
 }
 
 obtRecurso('resource1')
-    .then((recurso) => console.log(recurso))
-    .then(() => obtRecurso('resource2'))
-    .then((recurso) => console.log(recurso))
-    .then(() => obtRecurso('resource3'))
-    .then((recurso) => console.log(recurso))
-    .then(() => console.log('¡Completado!'))
+    .then((recurso) => {
+        console.log(recurso)
+        obtRecurso('resource2')
+            .then((recurso) => {
+                console.log(recurso)
+                obtRecurso('resource3')
+                    .then((recurso) => {
+                        console.log(recurso)
+                        console.log('¡Completado!')
+                    })
+            })
+    })
