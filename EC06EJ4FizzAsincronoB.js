@@ -8,10 +8,12 @@ fizz() devuelve true, debes imprimir “fizz” en lugar del número.
 Debes imprimir los números en orden pero tan rápido como puedas.
 */
 
-
 const FIZZ_MIN = 1
-const FIZZ_MAX = 100
+const FIZZ_MAX = 300
+const DELAY_MIN = 100
+const DELAY_MAX = 10000
 let fizz_resultados = []
+let impresos = 0
 
 function divisible(divisor, dividendo) {
     return dividendo % divisor == 0
@@ -21,13 +23,7 @@ function contiene(contenido, continente) {
     return continente.toString().indexOf(contenido) != -1
 }
 
-function fizzInmediato(int) {
-    return (divisible(3, int) || contiene('3', int)) ? 'fizz' : int
-}
-
-function fizzDiferido(int, callback) {
-    const MIN_DELAY = 100
-    const MAX_DELAY = 10000
+function fizzDiferido(int, callback, min_delay = DELAY_MIN, max_delay = DELAY_MAX) {
     setTimeout(
         () => {
             if (divisible(3, int) || contiene('3', int)) {
@@ -36,7 +32,7 @@ function fizzDiferido(int, callback) {
                 callback(false)
             }
         },
-        MIN_DELAY + (Math.random() * (MAX_DELAY - MIN_DELAY))
+        min_delay + (Math.random() * (max_delay - min_delay))
     )
 }
 
@@ -47,18 +43,10 @@ function fizz(int) {
 }
 
 function imprimirFizz(i) {
-    let imprimir = true
-    for (let j = FIZZ_MIN; j < i; j++) {
-        if (!fizz_resultados[j]) {
-            imprimir = false
-            break
-        }
-    }
-    // imprime si todos los fizz anteriores existen
-    // y después intenta imprimir el siguiente fizz
-    if (imprimir) {
+    while(impresos == i-1 && fizz_resultados[i]) {
         console.log(fizz_resultados[i])
-        imprimirFizz(i + 1)
+        impresos++
+        i++
     }
 }
 
