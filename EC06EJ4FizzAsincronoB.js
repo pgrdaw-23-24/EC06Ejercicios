@@ -24,15 +24,17 @@ function contiene(contenido, continente) {
 }
 
 function fizzDiferido(int, callback, min_delay = DELAY_MIN, max_delay = DELAY_MAX) {
+    let delay = min_delay + (Math.random() * (max_delay - min_delay))
     setTimeout(
         () => {
+            // console.log(`${Math.round(delay)}ms >>> ${int} `)
             if (divisible(3, int) || contiene('3', int)) {
                 callback(true)
             } else {
                 callback(false)
             }
         },
-        min_delay + (Math.random() * (max_delay - min_delay))
+        delay
     )
 }
 
@@ -43,7 +45,7 @@ function fizz(int) {
 }
 
 function imprimirFizz(i) {
-    while(impresos == i-1 && fizz_resultados[i]) {
+    while (impresos == i - 1 && fizz_resultados[i]) {
         console.log(fizz_resultados[i])
         impresos++
         i++
